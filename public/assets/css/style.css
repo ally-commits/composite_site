@@ -1,0 +1,17 @@
+.link {
+	text-decoration: none;
+	color: #333;
+	font-size: 16px;
+}
+.link:hover {
+	text-decoration: none;
+	color: rgb(99, 97, 97);
+}
+@media only screen and (max-width: 450px) {
+	.mobile-disbale {
+		display: none;
+	}
+	.mob-jes-center {
+		justify-content: center !important; 
+	}
+}

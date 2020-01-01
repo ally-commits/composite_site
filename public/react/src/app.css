@@ -1,0 +1,95 @@
+* {
+    padding: 0;
+    margin: 0; 
+}
+.step-parent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.step {
+    border: 2px solid #666EE8;
+    color: #666EE8;
+    padding: 10px 15px;
+    border-radius: 5px;
+    position: relative;
+}
+.head {
+    font-weight: 300;
+}
+.step:hover {
+    cursor: pointer;
+}
+.new {
+    background: rgb(238, 238, 238);
+    color: rgb(121, 121, 121);
+    border: 2px solid rgb(226, 226, 226);
+}
+.active,
+.done {
+    color: white;
+    background: #666EE8;
+    border: 2px solid #666EE8;
+}
+
+.new::after {
+    content: "";
+    width: 0;
+    height: 0;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    margin-left: -8px;
+    margin-bottom: -8px;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-top: 8px solid rgb(226, 226, 226) !important;
+}
+.border-lite {
+    border: 1px solid rgb(228, 228, 228);
+    border-radius: 2px;
+}
+.step::after {
+    content: "";
+    width: 0;
+    height: 0;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    margin-left: -8px;
+    margin-bottom: -8px;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-top: 8px solid #666EE8;
+}
+.flex-h {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    align-items: center;
+    /* background: #666EE8; */
+}
+.flex-end {
+    justify-content: flex-end;
+}
+.btn-no-radius {
+    border-radius: 0px;
+}
+.flex1 {
+    flex: 1;
+}
+.flex3 {
+    flex: 3;
+    background: green;
+}
+.line {
+    border: 1px solid rgb(219, 219, 219);
+    align-self: flex-start;
+    margin-top: 25px;
+}
+.line-active {
+    border: 1px solid #666EE8; 
+    align-self: flex-start;
+    margin-top: 25px;
+}
