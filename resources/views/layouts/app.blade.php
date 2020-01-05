@@ -29,47 +29,45 @@
 <body>
 
     <nav class="header-navbar w-100 box-shadow-2">
-        <div class="w-100 d-flex flex-wrap container mob-jes-center" style="height: 70px;justify-content: space-between; align-items: center">
-            <a class="navbar-brand p-0 m-0 d-flex h-100" href="#" style="align-items: center;"> 
+        <div class="w-100 d-flex flex-wrap container mob-jes-center mob-res" style="justify-content: space-between; align-items: center">
+            <a class="navbar-brand p-0 m-0 d-flex" href="#" style="align-items: center;"> 
                 <h2 class="brand-text p-0 mt-1">COMP</h2>
                 <img src="{{ asset('img/composite.png') }}" alt="" style="width: 50px; height: 50px;">
                 <h2 class="brand-text p-0 mt-1">SITE</h2>
-            </a> 
-            <div class="navabr-container content">
-                <ul class="nav navbar-nav float-right d-flex h-100" style="flex-direction: row;align-items: center;">
-                    @guest
-                        <div class="mr-1">
-                            <a class="btn link" href="{{ route('eventDetails') }}">Event Updates </a>
-                        </div>
-                        <div class="">
-                            <a class="btn link" href="{{ route('login') }}">{{ __('Login') }} </a>
-                        </div> 
-                    @else   
-                        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="mr-1">Hello,
-                            <span class="user-name text-bold-700">{{ Auth::user()->name }}</span>
-                            </span>
-                            <span class="avatar avatar-online">
-                            <img src="{{ asset('img/'.Auth::user()->event_id .'.png')}}" alt="avatar"><i></i></span>
-                        </button>
-                        <div class="dropdown-menu arrow" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
-                            <a class="dropdown-item" href="{{ route('logout') }}"
-                                onclick="event.preventDefault();
-                                                document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
-                            </a>
+            </a>  
+            <ul class="nav navbar-nav float-right d-flex" style="flex-direction: row;align-items: center;">
+                @guest
+                    <div class="mr-1">
+                        <a class="btn link" href="{{ route('eventDetails') }}">Event Updates </a>
+                    </div>
+                    <div class="">
+                        <a class="btn link" href="{{ route('login') }}">{{ __('Login') }} </a>
+                    </div> 
+                @else   
+                    <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="mr-1">Hello,
+                        <span class="user-name text-bold-700">{{ Auth::user()->name }}</span>
+                        </span>
+                        <span class="avatar avatar-online">
+                        <img src="{{ asset('img/'.Auth::user()->event_id .'.png')}}" alt="avatar"><i></i></span>
+                    </button>
+                    <div class="dropdown-menu arrow" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                                            document.getElementById('logout-form').submit();">
+                            {{ __('Logout') }}
+                        </a>
 
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                @csrf
-                            </form>
-                        </div>
-                    @endguest
-                </ul>
-            </div>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </div>
+                @endguest
+            </ul> 
         </div>
     </nav> 
     <main class="py-1">
-            @yield('content')
+        @yield('content')
     </main>
 
 

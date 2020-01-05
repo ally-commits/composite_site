@@ -74,3 +74,12 @@
 .br-2 {
 	border-radius: 2px;
 }
+
+.mob-res {
+	height: 70px;
+}
+@media only screen and (max-width: 420px) {
+	.mob-res {
+		height: 120px;
+	}
+}
