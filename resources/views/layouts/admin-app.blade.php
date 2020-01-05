@@ -162,11 +162,13 @@
 
                         <li class="nav-item"><a href="{{ route('admin.addEventHeads') }}"><i class="la la-user"></i><span class="menu-title">Add Event Heads</span></a></li>
 
-                        <li class="nav-item"><a href="/admin/viewEventHeads"><i class="ft ft-calendar"></i><span class="menu-title">View Event Heads Login</span></a></li>
+                        <li class="nav-item"><a href="{{ route('admin.viewEventHeads')}}"><i class="ft ft-calendar"></i><span class="menu-title">View Event Heads Login</span></a></li>
 
-                        <li class="nav-item"><a href="/admin/collegeDetails"><i class="ft ft-airplay"></i><span class="menu-title">College Details</span></a></li>
+                        <li class="nav-item"><a href="{{ route('admin.collegeDetails')}}"><i class="ft ft-airplay"></i><span class="menu-title">College Details</span></a></li>
                         
-                        <li class="nav-item"><a href="/admin/eventDetails"><i class="ft ft-circle"></i><span class="menu-title">Event Details</span></a></li>
+                        <li class="nav-item"><a href="{{ route('admin.eventDetails') }}"><i class="ft ft-circle"></i><span class="menu-title">Event Details</span></a></li>
+
+                        <li class="nav-item"><a href="{{ route('admin.codeNames') }}"><i class="ft ft-book"></i><span class="menu-title">Team Names</span></a></li>
 
 
  

@@ -20,6 +20,7 @@
   <script src="{{ asset('react/react.js') }}" crossorigin></script>
   <script src="{{ asset('react/react-dom.js') }}" crossorigin></script>
   <script src="{{ asset('react/babel.js') }}"></script>
+  <script src="{{ asset('react/axios.js') }}"></script>
 </head>
 
 <body>

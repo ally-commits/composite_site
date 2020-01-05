@@ -93,3 +93,28 @@
     align-self: flex-start;
     margin-top: 25px;
 }
+.card-container {
+    width: 400px;
+    position: absolute;
+    z-index: 2;
+    height: 300px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    align-items: center;
+    justify-content: space-around;  
+    
+}
+.font {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+.font-adjust {
+    font-size: 60px;
+    width: 90px;
+    padding: 10px;
+    margin: 10px;
+    border: 5px solid #28D094;
+    border-radius: 200px;
+}
+ 

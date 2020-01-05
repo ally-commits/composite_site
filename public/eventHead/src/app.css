@@ -1,0 +1,27 @@
+ .link {
+	text-decoration: none;
+	color: #333;
+	font-size: 16px;
+}
+.link:hover {
+	text-decoration: none;
+	color: rgb(99, 97, 97);
+}
+@media only screen and (max-width: 450px) {
+	.mobile-disbale {
+		display: none;
+	}
+	.mob-jes-center {
+		justify-content: center !important; 
+	}
+}
+.border-green {
+    border-top: 2px solid #28D094;
+}
+.border-redy {
+    border-top: 2px solid #FF4961;
+}
+.bg-warn {
+    background: #fff4ec;
+    border-color: #FF9149 !important;
+}

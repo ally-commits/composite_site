@@ -17,12 +17,12 @@ const Input = ({event_name, event_control,onEventControl, participant_number
                     <label className="col-md-2 label-control text-uppercase">{event_name}</label>
                     <div className="col-md-8">
                         
-                        {participant_number.map((val) => {
+                        {participant_number.map((val, i) => {
                             return (
                                 <input type="text" 
                                     className={"form-control mb-1 " + (error && "is-invalid")} disabled={!event_control}
                                     placeholder="Participant Name" name={val} 
-                                    onChange={onChange} value={inputValue[val]}
+                                    onChange={onChange} value={inputValue[val]} key={i}
                                     
                                 />
                             )
@@ -46,7 +46,8 @@ const Input = ({event_name, event_control,onEventControl, participant_number
 
 class App extends React.Component { 
     state = {
-        step: 2,
+        step: 1,
+        done: false,
         events: {
             it_manager: {
                 participating: false,
@@ -181,17 +182,20 @@ class App extends React.Component {
                 events[event].error = false;
             }
         }) 
-        this.setState({events}); 
+        this.setState({events});  
+        return validated;
     }
     handleUniqueNames = (step_events) => {
         let events = this.state.events;
         let uniqueList = [];
+        let validated = true;
         step_events.forEach(event => {
             if(events[event].participating) {
                 Object.keys(events[event].names).map(name => {
                     if(events[event].names[name] != '') {
                         uniqueList.forEach(val => { 
                             if(val.name == events[event].names[name]) {
+                                validated = false;
                                 if(val.event == event) {
                                     events[event].error = `${val.event} should have two diffrent names. if both the participant's names are same then diffrentiate then with surnames`
                                 } else {
@@ -207,8 +211,9 @@ class App extends React.Component {
                 })
             }
         })
-        this.setState({events}) 
-    }
+        this.setState({events, uniqueList}); 
+        return validated; 
+    } 
     handleValidation1 = () => {
         let college = this.state.college;
         if(college.name == '') 
@@ -219,22 +224,69 @@ class App extends React.Component {
     }
     handleValidation2 = () => {
         let step_events = ['it_manager','paper_presentation','treasure_hunt','web_design'];
-        this.handleFieldEmpty(step_events);
-        this.handleUniqueNames(step_events); 
+        let valid1 = this.handleFieldEmpty(step_events);
+        let valid2 = this.handleUniqueNames(step_events); 
+
+        if(valid1 && valid2) 
+            this.setState({step: 3});
     }
     handleValidation3 = () => {
-        let step_events = ['gaming','coding','photography','video_editing'];
-        this.handleFieldEmpty(step_events);
+        let step_events = ['it_manager','paper_presentation','treasure_hunt','web_design',
+                            'gaming','coding','photography','video_editing'];
+        let valid1 = this.handleFieldEmpty(step_events);
+        let valid2 = this.handleUniqueNames(step_events); 
+
+        if(valid1 && valid2) 
+            this.setState({step: 4});
     }
     handleValidation4 = () => {
         let step_events = ['it_quiz','cosplay','vlog','mad_ad'];
         this.handleFieldEmpty(step_events);
+        this.handleSubmit();
+    }
+    handleSubmit = () => {
+        let state = this.state;
+        let data = {
+            college: '',
+            events: {
+
+            }
+        }
+        data.college = state.college.name;
+        Object.keys(state.events).forEach(val => {
+            if(state.events[val].participating) {
+                data.events[val] = {};
+                name = '';
+                Object.keys(state.events[val].names).forEach(value => {
+                    name += "#" + state.events[val].names[value] + " ";
+                })
+                data.events[val].name = name;
+            }
+        }) 
+        axios.post('/registration', data)
+            .then((res) => {
+                console.log(res.data);
+                this.setState({done: res.data})
+            })
+            .catch(err => console.log(err.message));
     }
     render() {
         let events = this.state.events;
         let step = this.state.step; 
         return (
             <div className="">
+                {this.state.done 
+                    ?
+                <div className="bg-dark">
+                    <div className="card card-container d-flex box-shadow-4">
+                        <i className="ft ft-check font-adjust text-success"></i>
+                        <h6 className="text-uppercase font"><b>Your Team Name: </b>{this.state.done}</h6>
+                        <button class="btn btn-success" onClick={() => {
+                            window.location.reload();
+                        }}>Done</button>
+                    </div>
+                </div>
+                    :
                 <div className="card">
                     <div className="card-header">
                         <h2 className="card-title text-center">College Registration for Composite 2020</h2> 
@@ -389,6 +441,7 @@ class App extends React.Component {
                         </div>
                     } 
                 </div>
+                }
             </div>
         )
     }

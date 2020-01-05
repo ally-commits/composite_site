@@ -24,17 +24,6 @@ class EventHeadController extends Controller
     } 
     
     public function store(Request $request){
-        // $v = Validator::make($request->all(), [
-        //     'name' => ['required', 'string', 'max:255'],
-        //     'email' => ['required', 'string', 'max:255', 'unique:users'],
-        //     'password' => ['required', 'string', 'min:8', 'confirmed'],
-        //     'event_id' => ['required', 'string', 'min:8',],
-        // ]);
-    
-        // if ($v->fails())
-        // {
-        //     return redirect()->back()->withErrors($v->errors());
-        // }
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'max:255', 'unique:users'],

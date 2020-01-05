@@ -104,7 +104,7 @@
                         <div class="card-content">
                         <div class="media align-items-stretch">
                             <div class="text-center rounded-left">
-                                <img src="{{ asset('img/quiz.png') }}" class="p-0" style="width: 80px;">
+                                <img src="{{ asset('img/it_quiz.png') }}" class="p-0" style="width: 80px;">
                             </div>
                             <div class="p-1 media-body">
                             <h5>IT Quiz</h5>

@@ -9,8 +9,7 @@
 
     <title>{{ config('app.name', 'Composite Website') }}</title>
 
-    <!-- Scripts -->
-    <!-- <script src="{{ asset('js/app.js') }}" defer></script> -->
+    <!-- Scripts --> 
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -20,13 +19,9 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Quicksand:300,400,500,700"rel="stylesheet">
     <link href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome.min.css" rel="stylesheet"> 
-    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/vendors.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/forms/toggle/switchery.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/ui/dragula.min.css') }}"> 
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/vendors.css') }}"> 
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/app.css') }}"> 
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/core/menu/menu-types/vertical-content-menu.css') }}">
-    <link rel="placeholderstylesheet" type="text/css" href="{{ asset('app-assets/css/core/colors/palette-gradient.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/plugins/forms/switch.css') }}"> 
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">  
 
     @yield('css')
@@ -34,7 +29,7 @@
 <body>
 
     <nav class="header-navbar w-100 box-shadow-2">
-        <div class="w-100 d-flex flex-wrap container mob-jes-center" style="justify-content: space-between; align-items: center">
+        <div class="w-100 d-flex flex-wrap container mob-jes-center" style="height: 70px;justify-content: space-between; align-items: center">
             <a class="navbar-brand p-0 m-0 d-flex h-100" href="#" style="align-items: center;"> 
                 <h2 class="brand-text p-0 mt-1">COMP</h2>
                 <img src="{{ asset('img/composite.png') }}" alt="" style="width: 50px; height: 50px;">
