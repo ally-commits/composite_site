@@ -59,9 +59,9 @@ class App extends React.Component {
                                             return (
                                                 <div key={i} className="col-sm-12 col-md-4 col-lg-3 event-list ">
                                                     <div className="p-1 event-list-content shadow d-flex border-green" key={i} style={{ flexDirection: "row", alignItems: "center"}}>
-                                                        <span className="ft-user text-success"></span>
+                                                        <span style={{fontSize: '20px'}} className="ft-user text-success"></span>
                                                         <h5 className="p-0 m-0 px-1" style={{flex: 1}}>{data[value].college_code}</h5>
-                                                        <span className="ft-x text-danger" onClick={() =>{
+                                                        <span className="ft-x text-danger" style={{fontSize: '20px'}} onClick={() =>{
                                                             let data = this.state.data; 
                                                             data[value].active = 0;
                                                             this.setState({data})
@@ -73,9 +73,9 @@ class App extends React.Component {
                                             return (
                                                 <div key={i} className="col-sm-12 col-md-4 col-lg-3 event-list ">
                                                     <div className="p-1 event-list-content shadow d-flex border-redy" key={i} style={{ flexDirection: "row", alignItems: "center"}}>
-                                                        <span className="ft-user text-danger    "></span>
+                                                        <span style={{fontSize: '20px'}} className="ft-user text-danger    "></span>
                                                         <h5 className="p-0 m-0 px-1" style={{flex: 1}}>{data[value].college_code}</h5>
-                                                        <span className="ft-plus text-success" onClick={() => {
+                                                        <span className="ft-plus text-success"  style={{fontSize: '20px'}} onClick={() => {
                                                             let data = this.state.data; 
                                                             data[value].active = 1;
                                                             this.setState({data})

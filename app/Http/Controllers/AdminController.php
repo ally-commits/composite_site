@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use DB;
 
 class AdminController extends Controller
 {
@@ -23,7 +24,14 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin.home');
+        $participants = DB::table('participants')->count();
+        $college = DB::table('colleges')->count();
+        $events = DB::table('participants')
+                ->select('event_id', DB::raw('count(*) as total'))
+                ->groupBy('event_id')
+                ->get();
+
+        return view('admin.home', compact(['participants','college','events']));
     }
     public function notification()
     {

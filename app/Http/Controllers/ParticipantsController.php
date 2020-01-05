@@ -24,11 +24,10 @@ class ParticipantsController extends Controller
         // dd($data);
         // dd();
 
-        $data = DB::table('code_names')
-                ->where('active','=',true)
-                ->update(['active' => false]);
-
-        
+        $events = DB::table('participants')
+                ->select('event_id', DB::raw('count(*) as total'))
+                ->groupBy('event_id')
+                ->get();
 
         dd($data);
     }

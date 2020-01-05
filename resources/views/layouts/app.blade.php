@@ -39,7 +39,7 @@
                 <ul class="nav navbar-nav float-right d-flex h-100" style="flex-direction: row;align-items: center;">
                     @guest
                         <div class="mr-1">
-                            <a class="btn link" href="{{ route('login') }}">Event Updates </a>
+                            <a class="btn link" href="{{ route('eventDetails') }}">Event Updates </a>
                         </div>
                         <div class="">
                             <a class="btn link" href="{{ route('login') }}">{{ __('Login') }} </a>
