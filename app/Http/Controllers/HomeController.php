@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use DB;
+use OneSignal;
 
 class HomeController extends Controller
 {
@@ -52,6 +53,12 @@ class HomeController extends Controller
                 ->where('participant_id','=',$id)
                 ->update(['active' => false]);
         }
+
+        // dd($user);
+        $text = $user->event_id . ":" . $data['title'];
+        $url_content = 'http://localhost:8000/eventDetails/'. $user->event_id;
+        OneSignal::sendNotificationToAll($text, $url = $url_content, $data = null);
+
         return "done";
     }
 }

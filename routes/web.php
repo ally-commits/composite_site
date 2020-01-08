@@ -58,3 +58,11 @@ Route::prefix('admin')->group(function() {
     Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
     Route::post('/addEventHead', 'EventHeadController@store')->name('admin.addEventHead'); 
 });
+
+
+
+
+Route::get('/push', function () {
+    OneSignal::sendNotificationToAll("It Manager: Participants selected for round 2", 
+        $url = "https://updates.compositefest.com", $data = null);
+});
