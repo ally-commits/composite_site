@@ -10,46 +10,40 @@
                         <h4>Send Push Notification</h4>
                     </div>
                     <div class="card-body"> 
-                        <form class="form form-horizontal">
-                            <div class="form-body">
-                                <div class="form-group row">
-                                    <label class="col-md-3 label-control" for="timesheetinput1">Push Notification Title</label>
-                                    <div class="col-md-9">
-                                        <div class="position-relative has-icon-left">
-                                        <input type="text" id="timesheetinput1" class="form-control" placeholder="Title" name="title">
-                                        <div class="form-control-position">
-                                            <i class="ft-edit"></i>
-                                        </div>
-                                    </div>
+                        <form class="form form-horizontal" method="POST" action="{{ route('admin.pushNotification') }}">
+                            @csrf
+
+                            <div class="form-group row">
+                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Push Notification Content') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="name" type="text" 
+                                    class="form-control @error('text') is-invalid @enderror" name="text" 
+                                    value="{{ old('text') }}" required autocomplete="text" autofocus>
+
+                                    @error('text')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
-                            </div>
+                            </div> 
                             
-                            <div class="form-body">
-                                <div class="form-group row">
-                                    <label class="col-md-3 label-control" for="timesheetinput2">Push Notification link</label>
-                                    <div class="col-md-9">
-                                        <div class="position-relative has-icon-left">
-                                        <input type="text" id="timesheetinput2" class="form-control" placeholder="Link" name="link">
-                                        <div class="form-control-position">
-                                            <i class="ft-globe"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>  
+                            <div class="form-group row">
+                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Notification URL') }}</label>
 
+                                <div class="col-md-6">
+                                    <input id="name" type="url" 
+                                    class="form-control @error('url') is-invalid @enderror" name="url" 
+                                    value="{{ old('url') }}" required autocomplete="url" autofocus>
 
-                            <div class="form-body">
-                                <div class="form-group row">
-                                    <label class="col-md-3 label-control" for="timesheetinput3">Push Notification Content</label>
-                                    <div class="col-md-9">
-                                        <div class="position-relative has-icon-left">
-                                        <input name="content" class="form-control" rows="5" placeholder="Enter Content here" value="">
-                                        <div class="form-control-position">
-                                            <i class="ft-edit"></i>
-                                        </div>
-                                    </div>
+                                    @error('url')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
-                            </div>  
+                            </div> 
                             
                             <div class="form-actions right"> 
                                 <button type="submit" class="btn btn-block btn-primary">

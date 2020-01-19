@@ -10,13 +10,7 @@
     <div class="card">
         <div class="form-group p-2"> 
             <div class="d-flex">
-                @if(Session::has('message'))
-                    <div id="toast-container" class="toast-container toast-top-right">
-                        <div class="toast toast-success" aria-live="polite" style="anime-disappear">
-                            <div class="toast-title">{{ Session::get('message') }}</div> 
-                        </div>
-                    </div>
-                @endif
+                
                 <h2 style="flex: 1">Event Head Details</h2>
                 <a href="{{ route('admin.addEventHeads') }}" type="button" class="btn btn-primary bg-primary" style="border: none;">
                     <i class="ft-plus mr-1"></i>Add Event Head</a>

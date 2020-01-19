@@ -29,24 +29,26 @@ Route::post('/dashboard/updateData', 'HomeController@updateData')->name('eventHe
 
 Route::get('/eventDetails','EventDetailsController@index')->name('eventDetails');
 Route::get('/eventDetails/{event_id}','EventDetailsController@event')->name('eventDetail');
-
-// TESTING 
-Route::get('/data', 'ParticipantsController@index')->name('data');
-Route::get('/data-event', 'ParticipantsController@addEvent')->name('data.addEvent'); 
-Route::get('/data-admin', 'ParticipantsController@addAdmin')->name('data.addAdmin');
+ 
+ 
+Route::get('/admin-compositefest.com.2020', 'ParticipantsController@addAdmin')->name('data.addAdmin');
 
 Route::get('/', function () {
     return view('layouts.app');
 });
+
 Route::prefix('admin')->group(function() {
     Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
     Route::get('/dashboard', 'AdminController@index')->name('admin.home');
     Route::get('/notification', 'AdminController@notification')->name('admin.notification');
+    Route::post('/pushNotification', 'AdminController@pushNotification')->name('admin.pushNotification');
     Route::get('/addEventHeads', 'EventHeadController@addEventHeads')->name('admin.addEventHeads');
     Route::get('/removeEventHead/{id}', 'EventHeadController@delete')->name('admin.removeEventHead'); 
     Route::get('/viewEventHeads', 'EventHeadController@viewEventHeads')->name('admin.viewEventHeads'); 
     Route::get('/collegeDetails', 'CollegesController@index')->name('admin.collegeDetails'); 
     Route::get('/collegeDetails/{college_id}', 'CollegesController@collegeView')->name('admin.collegeView');
+    Route::get('/restart', 'AdminController@restartIndex')->name('admin.restart');
+    Route::post('/restart-admin-authorized', 'AdminController@restart')->name('admin.restartAuthorized');
 
     Route::get('/eventDetails', 'EventsController@index')->name('admin.eventDetails'); 
     Route::get('/eventDetails/{event_id}', 'EventsController@eventView')->name('admin.eventView'); 
@@ -57,12 +59,11 @@ Route::prefix('admin')->group(function() {
 
     Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
     Route::post('/addEventHead', 'EventHeadController@store')->name('admin.addEventHead'); 
+
+    Route::get('/participants', 'ParticipantsController@index')->name('admin.participants');
+    Route::get('/participants/del/{id}', 'AdminController@del')->name('admin.delParticipants');
+    Route::get('/participants/add/{id}', 'AdminController@add')->name('admin.addParticipants');
+
+    
 });
 
-
-
-
-Route::get('/push', function () {
-    OneSignal::sendNotificationToAll("It Manager: Participants selected for round 2", 
-        $url = "https://updates.compositefest.com", $data = null);
-});

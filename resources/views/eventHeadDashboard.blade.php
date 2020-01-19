@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('css')
     <link rel="stylesheet" type="text/css" href="{{ asset('eventHead/src/app.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/plugins/loaders/loaders.min.css') }}">
     <script src="{{ asset('react/react.js') }}" crossorigin></script>
     <script src="{{ asset('react/react-dom.js') }}" crossorigin></script>
     <script src="{{ asset('react/babel.js') }}"></script>

@@ -52,12 +52,12 @@ class HomeController extends Controller
             DB::table('participants')
                 ->where('participant_id','=',$id)
                 ->update(['active' => false]);
-        }
-
-        // dd($user);
+        } 
+        
         $text = $user->event_id . ":" . $data['title'];
         $url_content = 'http://localhost:8000/eventDetails/'. $user->event_id;
-        OneSignal::sendNotificationToAll($text, $url = $url_content, $data = null);
+
+        // OneSignal::sendNotificationToAll($text, $url = $url_content, $data = null);
 
         return "done";
     }

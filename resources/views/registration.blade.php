@@ -26,5 +26,5 @@
 <body>
   <div id="root"></div>
   <script src="{{ asset('react/src/App.js') }}" type="text/babel"></script>
-
+  <script src="{{ asset('app-assets/vendors/js/vendors.min.js') }}" type="text/javascript"></script>   
 </body>

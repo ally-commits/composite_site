@@ -74,6 +74,14 @@
                             <option>paper_presentation</option>
                             <option>vlog</option>
                             <option>mad_ad</option>
+                            <option>treasure_hunt</option>
+                            <option>gaming</option>
+                            <option>coding</option>
+                            <option>cosplay</option>
+                            <option>web_design</option>
+                            <option>exhibition</option>
+                            <option>video_editing</option>
+                            <option>photography</option>
                         </select>
 
                         @error('event_id')

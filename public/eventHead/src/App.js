@@ -1,13 +1,18 @@
 class App extends React.Component {
     state = {
         data: {},
-        loading: true 
+        loading: true ,
+        noData: false
     }
     componentDidMount = () => {
         axios.get('/dashboard/getData')
         .then(res => {
             let zero = "0";
-            this.setState({data: res.data,loading: false,title: res.data[zero].title})
+            if(res.data.length == 0) {
+                this.setState({noData: true, loading: false})
+            } else {
+                this.setState({data: res.data,loading: false,title: res.data[zero].title})
+            }
         }).catch(err => console.log(err));
     }
     handleSubmit = () => {
@@ -31,12 +36,26 @@ class App extends React.Component {
         let data = this.state.data;  
         return (
             <div>
-                {this.state.loading
-                    ?
-                    <div>
-                        loading
+                {this.state.noData &&
+                    <div className="d-flex p-2" style={{justifyContent: "center",alignItems: "center",height: "80vh" }}>
+                        <i className="ft-alert-triangle" style={{fontSize: "30px" }}></i> 
+                        <h2 className="m-0">  &nbsp;No Data Found</h2>
                     </div>
-                    :
+                }
+                {this.state.loading
+                    &&
+                    <div>
+                        <div className="loader-wrapper">
+                            <div className="loader-container">
+                                <div className="ball-clip-rotate-multiple loader-success">
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                {(this.state.loading && this.state.noData) &&
                     <div>
                         <div className="col-md-12 d-flex" style={{justifyContent: 'space-around'}}> 
                             <h4 className="text-center text-uppercase">{data[zero].event_id}</h4>

@@ -26,6 +26,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/core/menu/menu-types/vertical-content-menu.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/core/colors/palette-gradient.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/plugins/forms/switch.css') }}"> 
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/extensions/toastr.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}"> 
 
     @yield('css')
@@ -155,12 +156,12 @@
                 <div class="main-menu-content">
                     <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
                         <li class="nav-item">
-                            <a href="{{route('admin.home') }}"><i class="la la-home"></i><span class="menu-title">Home</span></a>
+                            <a href="{{route('admin.home') }}"><i class="ft ft-home"></i><span class="menu-title">Home</span></a>
                         </li>
                         
-                        <li class="nav-item"><a href="{{route('admin.notification') }}"><i class="la la-bell"></i><span class="menu-title">Push Notification</span></a></li>
+                        <li class="nav-item"><a href="{{route('admin.notification') }}"><i class="ft ft-bell"></i><span class="menu-title">Push Notification</span></a></li>
 
-                        <li class="nav-item"><a href="{{ route('admin.addEventHeads') }}"><i class="la la-user"></i><span class="menu-title">Add Event Heads</span></a></li>
+                        <li class="nav-item"><a href="{{ route('admin.addEventHeads') }}"><i class="ft ft-user"></i><span class="menu-title">Add Event Heads</span></a></li>
 
                         <li class="nav-item"><a href="{{ route('admin.viewEventHeads')}}"><i class="ft ft-calendar"></i><span class="menu-title">View Event Heads Login</span></a></li>
 
@@ -170,12 +171,21 @@
 
                         <li class="nav-item"><a href="{{ route('admin.codeNames') }}"><i class="ft ft-book"></i><span class="menu-title">Team Names</span></a></li>
 
+                        <li class="nav-item"><a href="{{ route('admin.participants') }}"><i class="ft ft-gitlab"></i><span class="menu-title">Participants</span></a></li>
+                        
+                        <li class="nav-item"><a href="{{ route('admin.restart') }}"><i class="ft ft-power"></i><span class="menu-title">Restart</span></a></li>
 
  
                     </ul>
                 </div>
             </div>
-
+            @if(Session::has('message'))
+                <div id="toast-container" class="toast-container toast-top-right">
+                    <div class="toast toast-success" aria-live="polite" style="anime-disappear">
+                        <div class="toast-title">{{ Session::get('message') }}</div> 
+                    </div>
+                </div>
+            @endif
             @yield('content')
         </div>
     </div>
