@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Composite Website') }}</title>
+    <title>{{ config('app.name', 'Composite ') }}</title>
 
     <!-- Scripts --> 
 

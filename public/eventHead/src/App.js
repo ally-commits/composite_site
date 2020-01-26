@@ -8,6 +8,7 @@ class App extends React.Component {
         axios.get('/dashboard/getData')
         .then(res => {
             let zero = "0";
+            console.log(res)
             if(res.data.length == 0) {
                 this.setState({noData: true, loading: false})
             } else {
@@ -55,7 +56,7 @@ class App extends React.Component {
                         </div>
                     </div>
                 }
-                {(this.state.loading && this.state.noData) &&
+                {(!this.state.loading && !this.state.noData) &&
                     <div>
                         <div className="col-md-12 d-flex" style={{justifyContent: 'space-around'}}> 
                             <h4 className="text-center text-uppercase">{data[zero].event_id}</h4>

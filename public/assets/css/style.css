@@ -83,3 +83,27 @@
 		height: 120px;
 	}
 }
+
+.main-container {
+	width: 100%;
+	height: calc(100vh -70px);
+	padding: 0;
+}
+.main-content {
+	display: flex;
+	height: calc(100vh - 100px);
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background: rgb(24, 24, 24);
+}
+.content-img {
+	width: 300px;   
+	filter: drop-shadow(1px 1px 1px #ffbf002c);
+}
+
+@media only screen and (max-width: 420px) {
+	.content-img {
+		width: 200px;   
+	}
+}

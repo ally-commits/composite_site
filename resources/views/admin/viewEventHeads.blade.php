@@ -16,7 +16,7 @@
                     <i class="ft-plus mr-1"></i>Add Event Head</a>
             </div>
             <hr>
-            <!-- <button type="button" class="btn btn-lg btn-block btn-outline-success mb-2" id="type-success">Success</button> -->
+            
             <table class="table table-striped table-bordered zero-configuration dataTable">
                 <thead>
                     <tr role="row">

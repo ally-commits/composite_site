@@ -47,14 +47,50 @@
                                         <td>{{ $participant->college_name }}</td>
                                         <td>{{ $participant->college_code }}</td>
                                         <td>{{ $participant->event_name }}</td> 
-                                        <td>
-                                            @if($participant->active) 
-                                                <a href="participants/del/{{ $participant->participant_id }}" class="btn text-white btn-danger"><i class="ft-x"></i> De-Activate</a>
+                                        <td class="d-flex" style="align-items: center;">
+                                            @if($participant->active)
+                                                <i class="ft-sun text-success" style="margin-right: 4px;"></i>
                                             @else
-                                                <a href="participants/add/{{ $participant->participant_id }}" class="btn text-white btn-success"><i class="ft-plus"></i> Activate</a>
+                                                <i class="ft-sun text-danger" style="margin-right: 4px;"></i>
                                             @endif
-                                        </td> 
-                                    </tr> 
+                                            <span class="dropdown">
+                                                <button id="{{ $participant->participant_id }}" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="btn btn-primary dropdown-toggle dropdown-menu-right"><i class="ft-settings"></i></button>
+                                                <span aria-labelledby="btnSearchDrop10" class="dropdown-menu mt-1 dropdown-menu-right">
+                                                    <a href="#" data-toggle="modal" data-target="#{{ $participant->participant_id }}" class="dropdown-item"><i class="ft-edit-2"></i> Edit</a>
+                                                    @if($participant->active) 
+                                                        <a href="participants/del/{{ $participant->participant_id }}" class="dropdown-item"><i class="ft-x"></i> De-Activate</a>
+                                                    @else
+                                                        <a href="participants/add/{{ $participant->participant_id }}" class="dropdown-item"><i class="ft-plus"></i> Activate</a>
+                                                    @endif
+                                                </span>
+                                            </span>
+                                        </td>
+                                    </tr>  
+                                    <div class="modal fade text-left" id="{{ $participant->participant_id }}" tabindex="-1" role="dialog" aria-labelledby="{{ $participant->participant_id }}" style="display: none;" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title" id="{{ $participant->participant_id }}">Participant Name</h4>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form method="POST" action="{{ route('admin.updateParticipant') }}" > 
+                                                        @csrf
+                                                        <div class="form-group">
+                                                            <label for="">Particpant's Name</label>
+                                                            <input type="text" name="participant_name" class="form-control" value="{{ $participant->participant_names }}">
+                                                        </div>
+                                                        <input type="hidden" name="participant_id" value="{{ $participant->participant_id }}" />
+                                                        <hr />
+                                                        <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-outline-primary">Save changes</button>
+                                                    </form>
+                                                </div> 
+                                            </div> 
+                                        </div>
+                                    </div>
                                 @endforeach
                             @else
                                 <div class="d-flex p-2" style="justify-content: center; align-items: center;height: 100vh;">

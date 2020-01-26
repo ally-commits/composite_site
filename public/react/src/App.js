@@ -4,7 +4,7 @@ if(localStorage.key) {
         location.href="/"
 }
 const Input = ({ event_name, event_control, onEventControl, participant_number
-    , onInputChange, inputValue, error, displayName = false
+    , onInputChange, inputValue, error, msg, displayName = false
 }) => {
     const sendFalse = () => {
         event_control && onEventControl(false, event_name)
@@ -21,7 +21,7 @@ const Input = ({ event_name, event_control, onEventControl, participant_number
                 <div className="form-group row">
                     <label className="col-md-3 label-control text-uppercase">{displayName ? displayName : event_name}</label>
                     <div className="col-md-7">
-
+                        {msg && <span className="text-muted" style={{marginTop: '-5px'}}>{msg}</span>}
                         {participant_number.map((val, i) => {
                             return (
                                 <input type="text"
@@ -57,6 +57,7 @@ class App extends React.Component {
         events: {
             it_manager: {
                 participating: false,
+                msg: 'It Manager Participant cannot participate in any other event',
                 names: {
                     name1: ''
                 },
@@ -64,6 +65,7 @@ class App extends React.Component {
             },
             vlog: {
                 participating: false,
+                msg: 'Vlog participant cannot participate in any other event',
                 names: {
                     name1: '', 
                 },
@@ -71,6 +73,7 @@ class App extends React.Component {
             },
             paper_presentation: {
                 participating: false,
+                msg: 'ring ring your have msg!!!!',
                 names: {
                     name1: ''
                 },
@@ -78,6 +81,7 @@ class App extends React.Component {
             },
             web_design: {
                 participating: false,
+                msg: 'ring ring your have msg!!!!',
                 names: {
                     name1: ''
                 },
@@ -85,6 +89,7 @@ class App extends React.Component {
             },
             coding: {
                 participating: false,
+                msg: 'ring ring your have msg!!!!',
                 names: {
                     name1: '',
                     name2: ''
@@ -93,6 +98,7 @@ class App extends React.Component {
             },
             it_quiz: {
                 participating: false,
+                msg: 'ring ring your have msg!!!!',
                 names: {
                     name1: '',
                     name2: ''
@@ -101,6 +107,7 @@ class App extends React.Component {
             },
             treasure_hunt: {
                 participating: false,
+                msg: 'Treasure Hunt participant cannot participate in any ohter event',
                 names: {
                     name1: '',
                     name2: ''
@@ -109,6 +116,7 @@ class App extends React.Component {
             },
             gaming: {
                 participating: false,
+                msg: 'ring ring your have msg!!!!',
                 names: {
                     name1: '',
                     name2: ''
@@ -117,6 +125,7 @@ class App extends React.Component {
             },
             video_editing: {
                 participating: false,
+                msg: 'ring ring your have msg!!!!',
                 names: {
                     name1: '',
                     name2: ''
@@ -125,6 +134,7 @@ class App extends React.Component {
             },
             photography: {
                 participating: false,
+                msg: 'ring ring your have msg!!!!',
                 names: {
                     name1: ''
                 },
@@ -132,6 +142,7 @@ class App extends React.Component {
             },
             mad_ad: {
                 participating: false,
+                msg: 'ring ring your have msg!!!!',
                 names: {
                     name1: '',
                     name2: '',
@@ -143,6 +154,7 @@ class App extends React.Component {
             },
             ice_breaker : {
                 participating: false,
+                msg: 'ring ring your have msg!!!!',
                 names: {
                     name1: '',
                     name2: ''
@@ -174,6 +186,7 @@ class App extends React.Component {
             names: [''],
             count: 1
         },
+        error: false
     } 
     getState = () => {
         if(localStorage.state) {
@@ -196,6 +209,7 @@ class App extends React.Component {
                 });
             }
         }); 
+        count = [...new Set(count)];
         this.setState({count});
     }
     gotoStep = (step) => {
@@ -236,38 +250,7 @@ class App extends React.Component {
         })
         this.setState({ events });
         return validated;
-    }
-    handleUniqueNames = (step_events) => { 
-        let events = this.state.events;
-        let uniqueList = [];
-        let validated = true; 
-        let dontPush = false;
-        step_events.forEach(event => {
-            if (events[event].participating) {
-                Object.keys(events[event].names).map(name => {
-                    if (events[event].names[name] != '') {
-                        dontPush = false;
-                        uniqueList.forEach(val => { 
-                            if(val.name == events[event].names[name]) {
-                                validated = false; 
-                                if (val.event == event) {
-                                    events[event].error = `${val.event} should have two diffrent names. if both the participant's names are same then diffrentiate then with surnames`
-                                } else {
-                                    events[event].error = `${events[event].names[name]} is already participating in ${val.event}. he cannot participate in ${event}`;
-                                }
-                            }
-                        })
-                        uniqueList.push({
-                            name: events[event].names[name],
-                            event
-                        })
-                    }
-                })
-            }
-        })
-        this.setState({ events, uniqueList });
-        return validated;
-    }
+    } 
     handleValidation1 = () => {
         let college = this.state.college;
         if (college.name == '')
@@ -279,36 +262,33 @@ class App extends React.Component {
     handleValidation2 = () => {
         let step_events = ['it_manager', 'paper_presentation', 'treasure_hunt', 'web_design'];
         this.handleCount();
-        let valid1 = this.handleFieldEmpty(step_events);
-        let valid2 = this.handleUniqueNames(step_events);
-
-        if (valid1 && valid2)
+        let valid1 = this.handleFieldEmpty(step_events); 
+        if (valid1)
             this.setState({ step: 3 });
     }
     handleValidation3 = () => {
         let step_events = ['it_manager', 'paper_presentation', 'treasure_hunt', 'web_design',
             'coding','gaming', 'photography', 'video_editing'];
-        let valid1 = this.handleFieldEmpty(step_events);
-        let valid2 = this.handleUniqueNames(step_events);
+        let valid1 = this.handleFieldEmpty(step_events); 
 
-        if (valid1 && valid2)
+        if (valid1)
             this.setState({ step: 4 });
     }
     handleValidation4 = async () => {
         let step_events = ['it_manager', 'paper_presentation', 'treasure_hunt', 'web_design',
-            'coding', 'gaming', 'photography', 'video_editing', 'it_quiz','vlog'];
+            'coding', 'gaming', 'photography', 'video_editing', 'it_quiz','vlog','mad_ad'];
         this.handleCount(true);
-        let valid1 = this.handleFieldEmpty(step_events);  
-        let mad_ad = this.handleFieldEmpty(['mad_ad']);
-        let valid3 = this.handleUniqueNames(step_events);
-        let valid5 = false;
-        if(mad_ad) { 
-            valid5 = await this.validateMadAdEvent();
-        }  
- 
-
-        if(valid1 && mad_ad  && valid3 && valid5) {
-            this.setState({step: 5});
+        let valid1 = this.handleFieldEmpty(step_events);   
+        this.setState({error: false});
+        if(valid1) {
+            await this.handleCount();
+            let count = this.state.count.length;
+            if(count > 15) {
+                let error = 'The Limit is 15 participant\'s. There are more then 15 participant\'s here';
+                this.setState({error})
+            } else {
+                this.setState({step: 5});
+            }
         }
     }
     handleValidation5 = async () => {
@@ -316,12 +296,9 @@ class App extends React.Component {
         cosplay.error.msg = false;
         exhibition.error.msg = false;
         this.handleCount(); 
-        let validated = true;
-        let valid4 = true;
+        this.setState({error: false});
+        let validated = true; 
         let ice_breaker = this.handleFieldEmpty(['ice_breaker']);
-        if(ice_breaker) {
-            valid4 = await this.validateIceBreakerEvent();
-        }
         cosplay.participating && cosplay.names.forEach((name, i) => {
             if(name == '') {
                 cosplay.error.msg = `Fields are empty . Please provide a valid Name`;
@@ -335,82 +312,17 @@ class App extends React.Component {
             } 
         })
         this.setState({cosplay});
-        if(validated && valid4) {
-            this.handleSubmit();
+        if(validated && ice_breaker) {
+            await this.handleCount();
+            let count = this.state.count.length;
+            if(count > 15) {
+                let error = 'The Limit is 15 participant\'s. There are more then 15 participant\'s here';
+                this.setState({error})
+            } else {
+                this.handleSubmit();
+            }
         }
         
-    }
-    validateMadAdEvent = async () => {
-        let validated = true;
-        if(this.state.events.mad_ad.participating) {
-            await this.handleCount();
-            let count = this.state.count;
-            let uniqueList = this.state.uniqueList;
-            let events = this.state.events;
-            let {name1,name2,name3,name4,name5} = this.state.events.mad_ad.names;
-            let nameList = [false,false,false,false,false];
-            let names = [name1,name2,name3,name4,name5];
-            uniqueList.forEach(unique => {
-                Object.keys(events.mad_ad.names).forEach((name, i) => { 
-                    if(events.mad_ad.names[name] == unique.name) { 
-                        if(unique.event != 'video_editing' && unique.event != 'it_quiz' && unique.event != 'coding' && unique.event != 'gaming') {
-                            events.mad_ad.error = `${events.mad_ad.names[name]} is already participating in ${unique.event} he cannot participate in Mad Ad. IT Quiz , Coding, Video Editing & Gaming participant's can participate in Mad Ad Event`;
-                            validated = false;
-                        } 
-                        count = [...new Set(count)]; 
-                        nameList[i] = true; 
-                    }
-                })
-            });
-            let newNameCount = [];
-            nameList.forEach((val, i) => {
-                if(!val) {
-                    newNameCount.push(i)
-                }
-            }); 
-            if(count.length + newNameCount.length > 15 && validated) {
-                events.mad_ad.error = `The Limit of participant's is 15. "${newNameCount.map(val => names[val] + ", ")} cannot participate.  IT Quiz , Coding, Video Editing participant's can participate in Mad Ad Event`;
-                validated = false;
-            }
-            this.setState({events,count});
-        }
-        return validated;   
-    }
-    validateIceBreakerEvent = async () => {
-        let validated = true;
-        if(this.state.events.ice_breaker.participating) {
-            await this.handleCount();
-            let count = this.state.count;
-            let uniqueList = this.state.uniqueList;
-            let events = this.state.events;
-            let {name1,name2} = this.state.events.ice_breaker.names;
-            let nameList = [false,false];
-            let names = [name1,name2];
-            uniqueList.forEach(unique => {
-                Object.keys(events.ice_breaker.names).forEach((name, i) => { 
-                    if(events.ice_breaker.names[name] == unique.name) { 
-                        if(unique.event != 'coding' && unique.event != 'gaming' && unique.event != 'it_quiz' && unique.event != 'video_editing') {
-                            events.ice_breaker.error = `${events.ice_breaker.names[name]} is already participating in ${unique.event} he cannot participate in Ice Breaker. IT Quiz , Coding, Video Editing participant's can participate in Mad Ad Event`;
-                            validated = false;
-                        } 
-                        count = [...new Set(count)]; 
-                        nameList[i] = true; 
-                    }
-                })
-            });
-            let newNameCount = [];
-            nameList.forEach((val, i) => {
-                if(!val) {
-                    newNameCount.push(i)
-                }
-            }); 
-            if(count.length + newNameCount.length > 15 && validated) {
-                events.ice_breaker.error = `The Limit of participant's is 15. "${newNameCount.map(val => names[val] + ", ")} cannot participate.  IT Quiz , Coding, Video Editing participant's can participate in Mad Ad Event`;
-                validated = false;
-            }
-            this.setState({events,count});
-        }
-        return validated;   
     } 
     handleSubmit = () => {
         let state = this.state;
@@ -466,7 +378,11 @@ class App extends React.Component {
                     </div>
                     :
                     <div className="card">
+                        
                         <div className="card-header box-shadow-1" style={{ position: 'fixed', backgroundColor: '#fff', zIndex: '10' }}>
+                            {this.state.error && <div className="pos-float box-shadow-1">
+                                <p>{this.state.error}</p>
+                            </div>}
                             <div className="d-flex" style={{ justifyContent: 'space-around', alignItems: 'center', width: '100vw' }}>
                                 <h2 className="card-title">College Registration for Composite 2020</h2>
                                 <h2 className="card-title">Participant Count:<span className="number">{this.state.count.length}</span></h2>
@@ -577,25 +493,25 @@ class App extends React.Component {
                                         <Input event_name={"it_manager"} event_control={events.it_manager.participating}
                                             onEventControl={this.onEventControl} participant_number={['name1']}
                                             onInputChange={this.onInputHandle} inputValue={events.it_manager.names}
-                                            error={events.it_manager.error}
+                                            error={events.it_manager.error} msg={events.it_manager.msg}
                                         />
 
                                         <Input event_name={"paper_presentation"} event_control={events.paper_presentation.participating}
                                             onEventControl={this.onEventControl} participant_number={['name1']}
                                             onInputChange={this.onInputHandle} inputValue={events.paper_presentation.names}
-                                            error={events.paper_presentation.error}
+                                            error={events.paper_presentation.error} msg={events.paper_presentation.msg}
                                         />
 
                                         <Input event_name={"treasure_hunt"} event_control={events.treasure_hunt.participating}
                                             onEventControl={this.onEventControl} participant_number={['name1', 'name2']}
                                             onInputChange={this.onInputHandle} inputValue={events.treasure_hunt.names}
-                                            error={events.treasure_hunt.error}
+                                            error={events.treasure_hunt.error} msg={events.treasure_hunt.msg}
                                         />
 
                                         <Input event_name={"web_design"} event_control={events.web_design.participating}
                                             onEventControl={this.onEventControl} participant_number={['name1']}
                                             onInputChange={this.onInputHandle} inputValue={events.web_design.names}
-                                            error={events.web_design.error}
+                                            error={events.web_design.error} msg={events.web_design.msg}
                                         />
                                         <hr />
 
@@ -609,25 +525,25 @@ class App extends React.Component {
                                         <Input event_name={"coding"} event_control={events.coding.participating}
                                             onEventControl={this.onEventControl} participant_number={['name1', 'name2']}
                                             onInputChange={this.onInputHandle} inputValue={events.coding.names}
-                                            error={events.coding.error}
+                                            error={events.coding.error} msg={events.coding.msg}
                                         />
 
                                         <Input event_name={"gaming"} event_control={events.gaming.participating}
                                             onEventControl={this.onEventControl} participant_number={['name1', 'name2']}
                                             onInputChange={this.onInputHandle} inputValue={events.gaming.names}
-                                            error={events.gaming.error}
+                                            error={events.gaming.error} msg={events.gaming.msg}
                                         />
 
                                         <Input event_name={"photography"} event_control={events.photography.participating}
                                             onEventControl={this.onEventControl} participant_number={['name1']}
                                             onInputChange={this.onInputHandle} inputValue={events.photography.names}
-                                            error={events.photography.error} displayName="PhotoGraphy and MEME"
+                                            error={events.photography.error}  msg={events.photography.msg}
                                         />
 
                                         <Input event_name={"video_editing"} event_control={events.video_editing.participating}
                                             onEventControl={this.onEventControl} participant_number={['name1', 'name2']}
                                             onInputChange={this.onInputHandle} inputValue={events.video_editing.names}
-                                            error={events.video_editing.error}
+                                            error={events.video_editing.error} msg={events.video_editing.msg}
                                         />
 
                                         <hr />
@@ -643,19 +559,19 @@ class App extends React.Component {
                                         <Input event_name={"it_quiz"} event_control={events.it_quiz.participating}
                                             onEventControl={this.onEventControl} participant_number={['name1', 'name2']}
                                             onInputChange={this.onInputHandle} inputValue={events.it_quiz.names}
-                                            error={events.it_quiz.error}
+                                            error={events.it_quiz.error} msg={events.it_quiz.msg}
                                         />
 
                                         <Input event_name={"vlog"} event_control={events.vlog.participating}
                                             onEventControl={this.onEventControl} participant_number={['name1']}
                                             onInputChange={this.onInputHandle} inputValue={events.vlog.names}
-                                            error={events.vlog.error}
+                                            error={events.vlog.error}  msg={events.vlog.msg} displayName={"Vlog & MEME"}
                                         />
 
                                         <Input event_name={"mad_ad"} event_control={events.mad_ad.participating}
                                             onEventControl={this.onEventControl} participant_number={['name1', 'name2', 'name3', 'name4', 'name5']}
                                             onInputChange={this.onInputHandle} inputValue={events.mad_ad.names}
-                                            error={events.mad_ad.error}
+                                            error={events.mad_ad.error} msg={events.mad_ad.msg}
                                         />
                                         <hr />
 
@@ -671,7 +587,7 @@ class App extends React.Component {
                                             <Input event_name={"ice_breaker"} event_control={events.ice_breaker.participating}
                                                 onEventControl={this.onEventControl} participant_number={['name1', 'name2']}
                                                 onInputChange={this.onInputHandle} inputValue={events.ice_breaker.names}
-                                                error={events.ice_breaker.error}
+                                                error={events.ice_breaker.error} msg={events.ice_breaker.msg}
                                             />
                                             <div className="form-group row">
                                                 <label className="col-md-2 label-control text-uppercase">COSPLAY</label>

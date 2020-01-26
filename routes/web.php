@@ -33,9 +33,6 @@ Route::get('/eventDetails/{event_id}','EventDetailsController@event')->name('eve
  
 Route::get('/admin-compositefest.com.2020', 'ParticipantsController@addAdmin')->name('data.addAdmin');
 
-Route::get('/', function () {
-    return view('layouts.app');
-});
 
 Route::prefix('admin')->group(function() {
     Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
@@ -61,6 +58,7 @@ Route::prefix('admin')->group(function() {
     Route::post('/addEventHead', 'EventHeadController@store')->name('admin.addEventHead'); 
 
     Route::get('/participants', 'ParticipantsController@index')->name('admin.participants');
+    Route::post('/participant/update', 'ParticipantsController@update')->name('admin.updateParticipant');
     Route::get('/participants/del/{id}', 'AdminController@del')->name('admin.delParticipants');
     Route::get('/participants/add/{id}', 'AdminController@add')->name('admin.addParticipants');
 

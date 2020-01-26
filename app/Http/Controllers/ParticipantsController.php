@@ -7,6 +7,7 @@ use DB;
 use App\Event;
 use App\Admin;
 use Illuminate\Support\Facades\Hash;
+use Redirect;
 
 class ParticipantsController extends Controller
 {
@@ -23,5 +24,13 @@ class ParticipantsController extends Controller
             'email' => 'admin',
             'password' => Hash::make('.pass.1234.'),
         ]);
+    }
+    public function update(Request $request) {
+        $data = $request->all();
+        DB::table('participants')
+            ->where('participant_id','=',$data['participant_id'])
+            ->update(['participant_names' => $data['participant_name']]);
+
+            return Redirect::route('admin.participants')->with('message', 'Participant Name Updated Succesfully');   
     }
 }
