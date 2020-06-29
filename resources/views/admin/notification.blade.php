@@ -29,7 +29,7 @@
                                 </div>
                             </div> 
                             
-                            <div class="form-group row">
+                            <!-- <div class="form-group row">
                                 <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Notification URL') }}</label>
 
                                 <div class="col-md-6">
@@ -43,7 +43,7 @@
                                         </span>
                                     @enderror
                                 </div>
-                            </div> 
+                            </div>  -->
                             
                             <div class="form-actions right"> 
                                 <button type="submit" class="btn btn-block btn-primary">

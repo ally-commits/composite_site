@@ -14,7 +14,7 @@ class CodenameController extends Controller
     }
     public function add(Request $request) {
         $request->validate([
-            'name' => ['required', 'string', 'max:255','min:5']
+            'name' => ['required', 'string', 'max:255','min:5',"unique:code_names"]
         ]);
 
         $data = $request->all(); 

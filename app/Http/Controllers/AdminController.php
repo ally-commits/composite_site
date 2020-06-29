@@ -86,11 +86,11 @@ class AdminController extends Controller
     public function pushNotification(Request $request) {
         $request->validate([ 
             'text' => ['required', 'string'],
-            'url' => ['required','string']
+            // 'url' => ['required','string']
         ]);
 
         $data = $request->all(); 
-        OneSignal::sendNotificationToAll($data['text'], $url = $data['url'], $data = null);
+        OneSignal::sendNotificationToAll($data['text'], $url = "https://google.com", $data = null);
 
         return Redirect::route('admin.notification')->with('message', 'Push Notification Sent');   
     }

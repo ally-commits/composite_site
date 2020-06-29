@@ -33,12 +33,12 @@
                             <td>{{ $user['id'] }}</td>
                             <td>{{ $user['name']}}</td>
                             <td>{{ $user['email'] }}</td>
-                            <td>{{ $user['event_id'] }}</td> 
+                            <td>{{ $user['event_id'] }}</td>    
                             <td>
                                 <span class="dropdown">
                                     <button id="btnSearchDrop10" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="btn btn-primary dropdown-toggle dropdown-menu-right"><i class="ft-settings"></i></button>
                                     <span aria-labelledby="btnSearchDrop10" class="dropdown-menu mt-1 dropdown-menu-right">
-                                    <a href="#" class="dropdown-item"><i class="ft-edit-2"></i> Edit</a>
+                                    <!-- <a href="#" class="dropdown-item"><i class="ft-edit-2"></i> Edit</a> -->
                                     <a href="removeEventHead/{{ $user->id }}" class="dropdown-item"><i class="ft-trash-2"></i> Delete</a> 
                                     </span>
                                 </span>
