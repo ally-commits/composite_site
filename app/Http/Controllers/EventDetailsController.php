@@ -21,6 +21,7 @@ class EventDetailsController extends Controller
             ->where('participants.event_id', '=', $id)
             ->where('participants.active','=',true)
             ->get(); 
+        // dd();
         return view('eventDetail')->with('teams',$data);
     }
 }

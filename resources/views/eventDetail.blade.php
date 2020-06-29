@@ -4,6 +4,7 @@
 @endsection
 
 @section('content')
+    @if(count($teams) > 0)
     <div class="container card p-2 m-auto">
         <div class="row">
             <div class="col-sm-12 col-md-4 col-lg-4 d-flex" style="justify-content: center;">
@@ -26,4 +27,7 @@
             @endforeach 
         </div>
     </div>
+    @else 
+        <div style="display: flex; justify-content: center; margin-top: 50px;">No Data Found</div>
+    @endif
 @endsection
