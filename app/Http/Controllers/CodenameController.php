@@ -5,12 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\CodeName;
 use Redirect;
-
+use DB;
 class CodenameController extends Controller
 {
     public function index() {
-        $codenames = CodeName::all(); 
-
+        $codenames = DB::table("code_names")->get();
         return view('admin.codeNames')->with('codenames',$codenames);
     }
     public function add(Request $request) {

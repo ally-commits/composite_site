@@ -15,7 +15,7 @@ class Admin extends Authenticatable
       * @var array
       */
     protected $fillable = [
-        'email', 'password',
+        'username', 'password',
     ];
      /**
       * The attributes that should be hidden for arrays.

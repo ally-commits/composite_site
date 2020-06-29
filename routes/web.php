@@ -36,6 +36,7 @@ Route::get('/admin-compositefest.com.2020', 'ParticipantsController@addAdmin')->
 
 Route::prefix('admin')->group(function() {
     Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
+    
     Route::get('/dashboard', 'AdminController@index')->name('admin.home');
     Route::get('/notification', 'AdminController@notification')->name('admin.notification');
     Route::post('/pushNotification', 'AdminController@pushNotification')->name('admin.pushNotification');
